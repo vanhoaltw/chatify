@@ -7,6 +7,7 @@ import Home from "./Components/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { auth, db } from "./Firebase/Firebase";
 import "./App.css";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {

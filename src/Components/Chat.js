@@ -214,12 +214,16 @@ function Chat() {
               className={classes.message}
               required
               id="outlined-basic"
-              label="Enter Message"
+              placeholder="Enter Message"
               variant="outlined"
               multiline
-              rows={1}
-              rowsMax={2}
+              maxRows={3}
               value={userNewMsg}
+              onKeyDown={(e) => {
+                if (e.code === "Enter") {
+                  setUserNewMsg(e.target.value);
+                }
+              }}
               onChange={(e) => {
                 setUserNewMsg(e.target.value);
               }}

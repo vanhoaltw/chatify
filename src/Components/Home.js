@@ -7,6 +7,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 import { db } from "../Firebase/Firebase";
+import Skeleton from "react-loading-skeleton";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -58,10 +59,12 @@ const useStyles = makeStyles((theme) => ({
 
 function Home() {
   const classes = useStyles();
+  const [loading, setLoading] = useState(false);
   const [channels, setChannels] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
+    setLoading(true);
     db.collection("channels")
       .orderBy("channelName", "asc")
       .onSnapshot((snapshot) => {
@@ -71,6 +74,7 @@ function Home() {
             id: channel.id,
           }))
         );
+        setLoading(false);
       });
   }, []);
 
@@ -85,13 +89,35 @@ function Home() {
           <Typography component="h1" className={classes.heading}>
             Welcome to Chatify
           </Typography>
-          <Typography component="h1" className={classes.subHeading}>
-            Effortless live chat to hangout with friends!
-          </Typography>
         </Grid>
       </Grid>
 
       <Grid container className={classes.rootChannel}>
+        {!loading && !channels.length && (
+          <Typography
+            component="h2"
+            style={{ marginTop: 20, color: "#fff", fontSize: 20, margin: '0 auto' }}
+          >
+            No channel
+          </Typography>
+        )}
+        {loading &&
+          [...Array(4).keys()].map((i) => (
+            <Grid item xs={6} md={3} className={classes.channelDiv} key={i}>
+              <Card className={classes.channelCard}>
+                <CardActionArea>
+                  <CardContent className={classes.channelContent}>
+                    <Skeleton
+                      style={{ borderRadius: "100%" }}
+                      height={80}
+                      width={80}
+                    />
+                    <Skeleton height={60} width="100%" />
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+          ))}
         {channels.map((channel) => (
           <Grid
             item

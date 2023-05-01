@@ -3,7 +3,6 @@ import Button from "@material-ui/core/Button";
 import { FcGoogle } from "react-icons/fc";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import loginImg from "../Assets/login.png";
 import Topography from "@material-ui/core/Typography";
 import { auth, provider } from "../Firebase/Firebase";
 
@@ -35,20 +34,12 @@ function SignUp() {
   const classes = useStyles();
 
   const login = () => {
-    auth
-      .signInWithPopup(provider)
-      .then((res) => {
-        console.log("Success");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    auth.signInWithPopup(provider);
   };
 
   return (
     <Container component="div" maxWidth="xs" className={classes.root}>
       <div className={classes.paper}>
-        <img src={loginImg} className={classes.mainImg} alt="signup img" />
         <Topography variant="h4" style={{ paddingTop: "15px" }}>
           Sign In To Chatify
         </Topography>

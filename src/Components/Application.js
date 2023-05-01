@@ -192,9 +192,16 @@ function Application(props) {
       </Toolbar>
       <Divider />
       <Grid className={classes.avatarGrid}>
-        <div className={classes.avatarIcon}>
+        <div
+          aria-label="account of current user"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          className={classes.avatarIcon}
+          style={{ cursor: 'pointer' }}
+          onClick={handleMenu}
+        >
           <StyledBadge
-            overlap="circle"
+            overlap="circular"
             anchorOrigin={{
               vertical: "bottom",
               horizontal: "right",
@@ -209,14 +216,6 @@ function Application(props) {
           </StyledBadge>
           <Typography variant="h6" className={classes.avatarDisplayName}>
             {userDetails.displayName}
-          </Typography>
-        </div>
-        <div>
-          <Typography variant="h4" className={classes.avatarName}>
-            {userDetails.name}
-          </Typography>
-          <Typography variant="h4" className={classes.avatarName}>
-            {userDetails.email}
           </Typography>
         </div>
       </Grid>
@@ -261,23 +260,7 @@ function Application(props) {
           >
             <MenuIcon />
           </IconButton>
-
-          <Typography variant="h6" className={classes.title}>
-            <Link to="/" style={{ textDecoration: "none", color: "#dcddde" }}>
-              Home
-            </Link>
-          </Typography>
-
           <div>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}
@@ -299,7 +282,7 @@ function Application(props) {
               </MenuItem>
 
               <MenuItem onClick={signOut}>
-                <GoSignOut /> &nbsp; Sign Out of Chatify
+                <GoSignOut /> &nbsp; Sign Out
               </MenuItem>
             </Menu>
           </div>

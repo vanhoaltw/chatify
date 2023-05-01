@@ -98,8 +98,6 @@ function FileUpload({ setState, file }) {
     uploadRef.on(
       "state_changed",
       (snapshot) => {
-        // Observe state change events such as progress, pause, and resume
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setProgress(progress);
       },
@@ -107,8 +105,6 @@ function FileUpload({ setState, file }) {
         console.log(error);
       },
       () => {
-        // Handle successful uploads on complete
-        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         uploadRef.snapshot.ref.getDownloadURL().then((downloadURL) => {
           sendMsg(downloadURL);
         });
